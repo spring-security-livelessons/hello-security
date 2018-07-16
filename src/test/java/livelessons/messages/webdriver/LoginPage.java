@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.messages.webdriver;
+package livelessons.messages.webdriver;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +35,7 @@ public class LoginPage {
 	}
 
 	public void assertAt() {
-		assertThat(this.driver.getTitle()).isEqualTo("Login Page");
+		assertThat(this.driver.getTitle()).isEqualTo("Please sign in");
 	}
 
 	public Form form() {
@@ -49,7 +49,7 @@ public class LoginPage {
 		@FindBy(name = "password")
 		private WebElement password;
 
-		@FindBy(name = "submit")
+		@FindBy(css = "button")
 		private WebElement button;
 
 		public Form(SearchContext context) {

@@ -14,52 +14,32 @@
  * limitations under the License.
  */
 
-package sample.messages;
+package livelessons.messages;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
-import sample.messages.webdriver.InboxPage;
-import sample.messages.webdriver.LoginPage;
+import livelessons.messages.webdriver.IndexPage;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+@WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class HelloSecurityTests {
+public class HelloSecurityApplicationTests {
 	@Autowired
 	private WebDriver driver;
 
-	@Autowired
-	private SecurityProperties securityProperties;
-
 	@Test
-	public void inboxRequiresLogin() {
-		LoginPage login = InboxPage.to(this.driver, LoginPage.class);
-		login.assertAt();
-	}
-
-	@Test
-	public void loginFailure() {
-		LoginPage login = InboxPage.to(this.driver, LoginPage.class);
-		login.form()
-			.username("user")
-			.password("invalid")
-			.login(LoginPage.class)
-			.assertAt();
-	}
-
-	@Test
-	public void loginSuccess() {
-		LoginPage login = InboxPage.to(this.driver, LoginPage.class);
-		login.form()
-				.username(this.securityProperties.getUser().getName())
-				.password(this.securityProperties.getUser().getPassword())
-				.login(InboxPage.class)
-				.assertAt();
+	public void indexViewMessage() {
+		IndexPage inbox = IndexPage.to(this.driver, IndexPage.class);
+		inbox.assertAt();
+		assertThat(inbox.message()).isEqualTo("Hello Security!");
 	}
 }

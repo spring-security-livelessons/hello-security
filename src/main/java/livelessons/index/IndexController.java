@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package sample.users;
+package livelessons.index;
 
-import org.springframework.data.repository.CrudRepository;
-
-import java.util.Optional;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Rob Winch
  */
-public interface UserRepository extends CrudRepository<User, Long> {
-	Optional<User> findByEmail(String email);
+@Controller
+public class IndexController {
+	@GetMapping("/")
+	String index() {
+		return "index";
+	}
 }

@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package sample.index;
+package livelessons;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @author Rob Winch
- */
-@Controller
-public class IndexController {
-	@GetMapping("/")
-	String index() {
-		return "redirect:/messages/inbox";
+@SpringBootApplication
+public class HelloSecurityApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(HelloSecurityApplication.class, args);
 	}
 }
