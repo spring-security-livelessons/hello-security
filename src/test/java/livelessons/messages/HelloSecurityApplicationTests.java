@@ -38,8 +38,8 @@ public class HelloSecurityApplicationTests {
 
 	@Test
 	public void indexViewMessage() {
-		IndexPage inbox = IndexPage.to(this.driver, IndexPage.class);
-		inbox.assertAt();
-		assertThat(inbox.message()).isEqualTo("Hello Security!");
+		IndexPage index = IndexPage.to(this.driver, IndexPage.class);
+		index.assertAt();
+		assertThat(index.message()).isEqualTo("Hello Security!");
 	}
 }
