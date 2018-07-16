@@ -16,6 +16,7 @@
 
 package livelessons.messages;
 
+import livelessons.messages.webdriver.LogoutPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -61,5 +62,24 @@ public class HelloSecurityTests {
 				.password(this.securityProperties.getUser().getPassword())
 				.login(IndexPage.class)
 				.assertAt();
+	}
+
+	@Test
+	public void logout() {
+		LoginPage login = IndexPage.to(this.driver, LoginPage.class);
+
+		login.form()
+				.username(this.securityProperties.getUser().getName())
+				.password(this.securityProperties.getUser().getPassword())
+				.login(IndexPage.class)
+				.assertAt();
+
+		LogoutPage.to(this.driver)
+			.assertAt()
+			.logout()
+			.assertAt();
+
+		login = IndexPage.to(this.driver, LoginPage.class);
+		login.assertAt();
 	}
 }
